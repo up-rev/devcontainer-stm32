@@ -16,10 +16,11 @@ Then in vscode you can use the green 'Remote' button in the bottom corner and se
 
 Containerized Build 
 -------------------
-Copy the example.Makefile to the root of the poject, and set the project name and build configuration.
+Copy docker.mk to the root of the poject. Set the PROJECT_NAME and BUILD_CONFIG variables. Then run the build 
 
 .. code::bash 
 
-    make dockerbuild 
+    make -f docker.mk build 
 
 This will pull the docker, mount the project, run a build, and exit. 
+
