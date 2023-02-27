@@ -4,21 +4,25 @@ Devcontainer-stm32
 This repo contains the dockerfile for the `uprev/stm32 image <https://hub.docker.com/r/uprev/stm32>`_ as well as the vscode devcontainer configuration
 
 
-Using devcontainer
-------------------
+Adding to a Project  
+-------------------
+
+Devcontainer 
+~~~~~~~~~~~~
+
 To add the devcontainer configuration to a project, add this repos as a submodule with the path '.devcontainer':
 
 .. code:: bash 
 
     git submodule add git@github.com:up-rev/devcontainer-stm32.git .devcontainer
 
-Then in vscode you can use the green 'Remote' button in the bottom corner and select 'Reopen in Container'
+Then in vscode you can use the green 'Remote' button in the bottom corner and select 'Reopen in Container'. This will mount the project inside of a docker container wit all of the build dependencies. 
 
 
-Containerized Build 
--------------------
+Containerized buids
+~~~~~~~~~~~~~~~~~~~
 
-This repo contains a makefile script for doing a containerized build of the project. This is meant to provide customers with a repeatable build environment to reproduce project arfitifacts. 
+This repo contains a makefile script for doing containerized builds of a project. This is meant to provide customers with a repeatable build environment to reproduce project arfitifacts. 
 
 1.  Copy docker.mk to the root of the poject. 
 2.  Set the PROJECT_NAME and BUILD_CONFIG variables
@@ -38,7 +42,7 @@ Example:
 would be the same as opening the project inside of the devcontainer and running : 
 
 .. code:: bash 
-    
+
     make build 
 
 
