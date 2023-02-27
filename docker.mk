@@ -14,16 +14,17 @@ DEVCONTAINER_IMAGE ?= uprev/stm32
 DOC_DIR ?= doc
 DOC_IMAGE ?= uprev/sphinx
 
-.PHONY: build doc
+.PHONY: docker-build docker-doc
 
 #Default is a passthrough to call targets in the default makefile
 .DEFAULT:
 	docker run --mount src=$(PWD),target=/workspace,type=bind -w /workspace $(DEVCONTAINER_IMAGE) \
 	make $@
 
-build: 
+docker-build: 
 	docker run --mount src=$(PWD),target=/workspace,type=bind -w /workspace $(DEVCONTAINER_IMAGE) \
 	/opt/stm32cubeide/stm32cubeide -nosplash -application org.eclipse.cdt.managedbuilder.core.headlessbuild -import $(PROJ_DIR) -build $(PROJECT_NAME)/$(BUILD_CONFIG)
 
-doc:
+docker-doc:
 	docker run --mount src=$(PWD),target=/workspace,type=bind -w /workspace/$(DOC_DIR) $(DOC_IMAGE) make latexpdf 
+	cp $(DOC_DIR)/_build/latex/*.pdf .
